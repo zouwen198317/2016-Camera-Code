@@ -1,5 +1,5 @@
 #!/bin/bash
-/home/ubuntu/code/build/camera &
+/home/ubuntu/code/keepRunning.sh &
 renice -n -1 -p $(ps -ef | grep ./build/camera | grep -v grep | awk '{print $3}')
 echo 0 > /sys/devices/system/cpu/cpuquiet/tegra_cpuquiet/enable 
 echo 1 > /sys/devices/system/cpu/cpu0/online

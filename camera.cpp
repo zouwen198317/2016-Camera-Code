@@ -157,7 +157,7 @@ Mat getImage() {
  
 #ifdef Rotate
   transpose(img,img);
-  flip(img,img,1);
+  flip(img,img,-1);
 #endif
 
   return img;
@@ -244,7 +244,7 @@ int main(int argc, char* argv[])
   capture = VideoCapture(0);
 #endif
   //Contours
-  const int minArea = 500;
+  const int minArea = 2500;
   const int thresh = 200; //For edge detection 
   vector<vector<Point> > contours;
   vector<Vec4i> hierarchy;
@@ -292,7 +292,7 @@ int main(int argc, char* argv[])
           prunedPoly.push_back(poly[i]);
           prunedHulls.push_back(hull[i]);
           prunedContours.push_back(contours[i]);
-          if(bRect.width * bRect.height > size-200 && bRect.width/2 + bRect.x < largestPos ) {
+          if(bRect.width * bRect.height > size ) {
             size = bRect.width * bRect.height;
             largest = prunedPoly.size() - 1;
             largestPos = bRect.width/2 + bRect.x;
@@ -353,7 +353,8 @@ int main(int argc, char* argv[])
       const double yCenterOfTarget = height/2.0 + tlcornerY;
       const double leftRightPixels = xCenterOfTarget - WIDTH/2.0;
       const double turn = (FOVH/(1.0 * WIDTH)) * leftRightPixels ;
-        
+      const double h = height;
+      //const double distance = -0.0001*h*h*h + 0.0234*h*h - 2.1194*h + 82.301;
       const double distance = (height-128)/(-3.7);
       if(distance < 0 || distance > 25 || abs(turn) > 40) {
         goto FPS;
