@@ -7,6 +7,7 @@
 #include <opencv2/gpu/gpu.hpp>
 #include <cmath>
 #include "GetImage.h"
+#include "defines.h"
 #include "network.h"
 
 // Network buffer size
@@ -26,35 +27,20 @@
 
 #define Rotate
 
-#define Log
-
-//#define r640x480
-//#define r1280x720
-#define r1920x1080
-
 #ifdef r1280x720
 #ifdef Rotate
 #define WIDTH 720
 #define HEIGHT 1280
-#else
-#define WIDTH 1280
-#define HEIGHT 720
 #endif
 #elif defined(r640x480)
 #ifdef Rotate
 #define WIDTH 480
 #define HEIGHT 640
-#else
-#define WIDTH 640
-#define HEIGHT 480
 #endif
 #elif defined(r1920x1080)
 #ifdef Rotate
 #define WIDTH 1080
 #define HEIGHT 1920
-#else
-#define WIDTH 1920
-#define HEIGHT 1080
 #endif
 #endif
 

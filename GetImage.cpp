@@ -6,9 +6,7 @@
 #define OUTFILE_NAME	"capture.yuv"
 #define COUNT_IGNORE	1	// frame count for initilize camera
 
-#define IMAGE_WIDTH	1920
-#define IMAGE_HEIGHT	1080
-
+#include "defines.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -77,7 +75,7 @@ using namespace std;
     void process_image(const void *p_buf,const int len_buf)
     {
         
-       cmat = Mat(IMAGE_WIDTH, IMAGE_HEIGHT, CV_8UC3, (void*)p_buf);	
+       cmat = Mat(WIDTH, HEIGHT, CV_8UC3, (void*)p_buf);	
        img = imdecode(cmat, 1);
  //      cout << "refcount: " <<((*img.refcount))<<endl; 
        //cvReleaseMat(img);
@@ -323,8 +321,8 @@ using namespace std;
       CLEAR(fmt);
       
       fmt.type                = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-      fmt.fmt.pix.width       = IMAGE_WIDTH;
-      fmt.fmt.pix.height      = IMAGE_HEIGHT;
+      fmt.fmt.pix.width       = WIDTH;
+      fmt.fmt.pix.height      = HEIGHT;
       //fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
       fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_MJPEG;
 
