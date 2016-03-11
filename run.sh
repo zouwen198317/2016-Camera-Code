@@ -1,4 +1,6 @@
 #!/bin/bash
+v4l2-ctl -c exposure_auto=1
+v4l2-ctl -c exposure_absolute=20
 /home/ubuntu/code/keepRunning.sh &
 renice -n -1 -p $(ps -ef | grep ./build/camera | grep -v grep | awk '{print $3}')
 echo 0 > /sys/devices/system/cpu/cpuquiet/tegra_cpuquiet/enable 

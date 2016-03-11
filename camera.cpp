@@ -157,7 +157,7 @@ Mat getImage() {
  
 #ifdef Rotate
   transpose(img,img);
-  flip(img,img,-1);
+  flip(img,img,1);
 #endif
 
   return img;
@@ -256,6 +256,9 @@ int main(int argc, char* argv[])
     clock_t t = clock();
 #endif
     Mat img = getImage();
+#ifdef ShowWindows
+    imshow("image", img);
+#endif
     GpuMat dilatedImg = GpuMat(getBWImage(img));
     //Contours processing
 #ifdef UseThresholding
@@ -352,13 +355,15 @@ int main(int argc, char* argv[])
       const double xCenterOfTarget = width/2.0 + tlcornerX;
       const double yCenterOfTarget = height/2.0 + tlcornerY;
       const double leftRightPixels = xCenterOfTarget - WIDTH/2.0;
-      const double turn = (FOVH/(1.0 * WIDTH)) * leftRightPixels ;
+      double turn = (FOVH/(1.0 * WIDTH)) * leftRightPixels ;
       const double h = height;
       //const double distance = -0.0001*h*h*h + 0.0234*h*h - 2.1194*h + 82.301;
       const double distance = (height-128)/(-3.7);
       if(distance < 0 || distance > 25 || abs(turn) > 40) {
         goto FPS;
       }
+
+      turn = turn + asin(11/16/distance);
 #ifdef Log   
       cout << "New image: " << endl;
       cout << "\tleftHeight: " << leftHeight << endl;

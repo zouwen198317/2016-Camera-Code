@@ -33,8 +33,11 @@ int sendMessage(const char *ipAddr, char* sendbuffer) {
   return 0;
 }
 
+int packet_num = 0;
+
 int sendMessageRect(const char *ipAddr, float distance, float angle) {
+  packet_num++;
   char sendbuffer[BUFFERSIZE];
-  sprintf(sendbuffer, "%f:%f", distance, angle);
+  sprintf(sendbuffer, "%d;%f:%f", packet_num, distance, angle);
   return sendMessage(ipAddr, sendbuffer);
 }
